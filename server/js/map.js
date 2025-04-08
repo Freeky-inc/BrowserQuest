@@ -9,18 +9,22 @@ var cls = require('./lib/class')
 module.exports = Map = cls.Class.extend({    
     init: function(filepath) {
     	var self = this;
-    
-    	this.isLoaded = false;
-    
-    	path.exists(filepath, function(exists) {
-            if(!exists) {
-                log.error(filepath + " doesn't exist.");
+
+        this.isLoaded = false;
+
+        fs.access(filepath, fs.constants.F_OK, function(err) {
+            if (err) {
+                console.error(filepath + " doesn't exist.");
                 return;
             }
-        
+
             fs.readFile(filepath, function(err, file) {
+                if (err) {
+                    console.error("Error reading file: " + err.message);
+                    return;
+                }
+
                 var json = JSON.parse(file.toString());
-            
                 self.initMap(json);
             });
         });
@@ -92,7 +96,7 @@ module.exports = Map = cls.Class.extend({
                     tileIndex += 1;
                 }
             }
-            //log.info("Collision grid generated.");
+            //console.log("Collision grid generated.");
         }
     },
 

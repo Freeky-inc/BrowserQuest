@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "private": false,
   "dependencies": {
-    "underscore": "1.13.7",
-    "log": "6.3.2",
     "bison": "1.1.1",
+    "log": "^6.3.2",
+    "memcached": "2.2.2",
+    "sanitizer": "0.1.3",
+    "underscore": "1.13.7",
     "websocket": "1.0.35",
     "websocketserver": "1.0.0",
-    "sanitizer": "0.1.3",
-    "memcached": "2.2.2"
+    "ws": "^8.18.1"
   }
 }

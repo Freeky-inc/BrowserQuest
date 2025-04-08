@@ -15,6 +15,9 @@
 /*global readFile: true, process: false, Packages: false, print: false,
 console: false, java: false, module: false */
 
+
+const fs = require('fs')
+
 var requirejs, require, define;
 (function (console, args, readFileFunc) {
 
@@ -88,7 +91,8 @@ var requirejs, require, define;
         };
 
         exists = function (fileName) {
-            return path.existsSync(fileName);
+            const fs = require('fs');
+            return fs.existsSync(fileName);
         };
 
 
@@ -2218,7 +2222,7 @@ var requirejs, require, define;
         context.loaded[moduleName] = false;
         context.scriptCount += 1;
 
-        if (path.existsSync(url)) {
+        if (fs.existsSync(url)) {
             contents = fs.readFileSync(url, 'utf8');
 
             contents = req.makeNodeWrapper(contents);
