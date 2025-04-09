@@ -1,6 +1,6 @@
 
 var cls = require("./lib/class"),
-    _ = require("underscore");
+_ = require("underscore");
 
 module.exports = Metrics = Class.extend({
     init: function(config) {

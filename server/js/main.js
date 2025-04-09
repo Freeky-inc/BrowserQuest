@@ -1,14 +1,13 @@
-
 var fs = require('fs'),
-    Metrics = require('./metrics');
-
+Metrics = require('./metrics'),
+Log = require('log'),
+log;
 
 function main(config) {
     var ws = require("./ws"),
         WorldServer = require("./worldserver"),
-        Log = require('log'),
         _ = require('underscore'),
-        server = new ws.MultiVersionWebsocketServer(config.port),
+        server = new ws.WebSocketServer(config.port),
         metrics = config.metrics_enabled ? new Metrics(config) : null;
         worlds = [],
         lastTotalPlayers = 0,
@@ -27,14 +26,17 @@ function main(config) {
     
     switch(config.debug_level) {
         case "error":
-            log = new Log(Log.ERROR); break;
+            log = new Log(console.error);
+            break;
         case "debug":
-            log = new Log(Log.DEBUG); break;
+            log = new Log(console.log); 
+            break;
         case "info":
-            log = new Log(Log.INFO); break;
+            log = new Log(console.log); 
+            break;
     };
     
-    log.info("Starting BrowserQuest game server...");
+    console.log("Starting BrowserQuest game server...");
     
     server.onConnect(function(connection) {
         var world, // the one in which the player will be spawned
@@ -109,6 +111,7 @@ function getWorldDistribution(worlds) {
 }
 
 function getConfigFile(path, callback) {
+    console.log("Tentative de lecture de :", path);
     fs.readFile(path, 'utf8', function(err, json_string) {
         if(err) {
             console.error("Could not open config file:", err.path);
@@ -119,8 +122,8 @@ function getConfigFile(path, callback) {
     });
 }
 
-var defaultConfigPath = './server/config.json',
-    customConfigPath = './server/config_local.json';
+var defaultConfigPath = "./server/config.json",
+    customConfigPath = "./server/config_local.json";
 
 process.argv.forEach(function (val, index, array) {
     if(index === 2) {
