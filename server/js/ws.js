@@ -1,8 +1,8 @@
 
 var cls = require("./lib/class"),
 url = require('url'),
-wsserver = require("ws"),
-miksagoConnection = require('websocketserver/lib/ws/connection'),
+wsserver = require("ws")
+const WebSocket = require('ws'),
 worlizeRequest = require('websocket').request,
 http = require('http'),
 Utils = require('./utils'),
@@ -93,7 +93,7 @@ var Connection = cls.Class.extend({
  * Websocket server supporting draft-75, draft-76 and version 08+ of the WebSocket protocol.
  * Fallback for older protocol versions borrowed from https://gist.github.com/1219165
  */
-WS.MultiVersionWebsocketServer = Server.extend({
+WS.WebSocketServer = Server.extend({
     worlizeServerConfig: {
         // All options *except* 'httpServer' are required when bypassing
         // WebSocketServer.
