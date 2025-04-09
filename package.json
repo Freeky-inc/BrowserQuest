@@ -1,7 +1,12 @@
 {
-  "name": "BrowserQuest",
+  "name": "browserquest",
   "version": "0.0.1",
   "private": false,
+  "scripts": {
+    "start": "node server/js/main.js",
+    "start:client": "npx serve client -l 8080",
+    "dev": "npm-run-all --parallel start start:client"
+  },
   "dependencies": {
     "bison": "1.1.1",
     "log": "6.3.2",
